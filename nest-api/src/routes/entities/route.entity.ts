@@ -13,17 +13,17 @@ export class Route {
   @Prop(
     raw({
       lat: { type: Number },
-      lon: { type: Number },
+      lng: { type: Number },
     }),
   )
-  startPosition: { lat: number; lon: number };
+  startPosition: { lat: number; lng: number };
   @Prop(
     raw({
       lat: { type: Number },
-      lon: { type: Number },
+      lng: { type: Number },
     }),
   )
-  endPosition: { lat: number; lon: number };
+  endPosition: { lat: number; lng: number };
 }
 
 export const RouteSchema = SchemaFactory.createForClass(Route);

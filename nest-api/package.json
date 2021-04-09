@@ -29,6 +29,8 @@
     "@nestjs/microservices": "^7.6.15",
     "@nestjs/mongoose": "^7.2.4",
     "@nestjs/platform-express": "^7.6.15",
+    "@nestjs/platform-socket.io": "^7.6.15",
+    "@nestjs/websockets": "^7.6.15",
     "kafka": "^0.2.3",
     "kafkajs": "^1.15.0",
     "mongoose": "^5.12.3",

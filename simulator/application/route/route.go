@@ -17,7 +17,7 @@ type Route struct {
 
 type Position struct {
 	Lat float64 `json:"lat"`
-	Lon float64 `json:"lon"`
+	Lng float64 `json:"lng"`
 }
 
 type ParcialRouteosition struct {
@@ -49,14 +49,14 @@ func (r *Route) LoadPositions() error {
 		if err != nil {                             //Caso a variável erro não esteja vazia, retorna o erro
 			return nil
 		}
-		lon, err := strconv.ParseFloat(data[1], 64)
+		lng, err := strconv.ParseFloat(data[1], 64)
 		if err != nil {
 			return nil
 		}
 
 		r.Positions = append(r.Positions, Position{ //Realiza append dos valores do txt para a struct
 			Lat: lat,
-			Lon: lon,
+			Lng: lng,
 		})
 	}
 	return nil
@@ -70,7 +70,7 @@ func (r *Route) ExportJsonPositions() ([]string, error) {
 	for k, value := range r.Positions { //For para alocar valores nas structs
 		route.ID = r.ID
 		route.ClientID = r.ClientID
-		route.Position = []float64{value.Lat, value.Lon}
+		route.Position = []float64{value.Lat, value.Lng}
 		route.Finished = false
 		if total-1 == k {
 			route.Finished = true
