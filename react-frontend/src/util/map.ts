@@ -27,22 +27,32 @@ export class Route {
     );
     this.calculateRoute();
   }
-  private calculateRoute(){
-      const currentPosition = this.currentMarker.getPosition() as google.maps.LatLng;
-      const endPosition = this.currentMarker.getPosition() as google.maps.LatLng;
 
-      new google.maps.DirectionsService().route({
-          origin: currentPosition,
-          destination: endPosition,
-          travelMode: google.maps.TravelMode.DRIVING,
-      }, (result, status) => {
-          if(status === 'OK'){
-              this.directionsRender.setDirections(result);
-              return;
-          }
+  private calculateRoute() {
+    const currentPosition = this.currentMarker.getPosition() as google.maps.LatLng;
+    const endPosition = this.endMarker.getPosition() as google.maps.LatLng;
 
-          throw new Error(status);
-      })
+    new google.maps.DirectionsService().route(
+      {
+        origin: currentPosition,
+        destination: endPosition,
+        travelMode: google.maps.TravelMode.DRIVING,
+      },
+      (result, status) => {
+        if (status === "OK") {
+          this.directionsRender.setDirections(result);
+          return;
+        }
+
+        throw new Error(status);
+      }
+    );
+  }
+
+  delete() {
+    this.currentMarker.setMap(null);
+    this.endMarker.setMap(null);
+    this.directionsRender.setMap(null);
   }
 }
 
@@ -52,6 +62,17 @@ export class Map {
   constructor(element: Element, options: google.maps.MapOptions) {
     this.map = new google.maps.Map(element, options);
   }
+
+  moveCurrentMarker(id: string, position: google.maps.LatLngLiteral){
+    this.routes[id].currentMarker.setPosition(position);
+  }
+
+  removeRoute(id: string){
+    const route =  this.routes[id];
+    route.delete();
+    delete this.routes[id];
+  }
+
   addRoute(
     id: string,
     routeOptions: {
