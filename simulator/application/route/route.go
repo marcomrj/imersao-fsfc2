@@ -45,11 +45,11 @@ func (r *Route) LoadPositions() error {
 
 	for scanner.Scan() { //Percorre o arq
 		data := strings.Split(scanner.Text(), ",")
-		lat, err := strconv.ParseFloat(data[0], 64) //Realiza o casting
+		lat, err := strconv.ParseFloat(data[1], 64) //Realiza o casting
 		if err != nil {                             //Caso a variável erro não esteja vazia, retorna o erro
 			return nil
 		}
-		lng, err := strconv.ParseFloat(data[1], 64)
+		lng, err := strconv.ParseFloat(data[0], 64)
 		if err != nil {
 			return nil
 		}
